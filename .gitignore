@@ -1,0 +1,9 @@
+*.root
+*.o
+*.eps
+*Def.h
+*Def.cpp
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Delphes_Analysis
