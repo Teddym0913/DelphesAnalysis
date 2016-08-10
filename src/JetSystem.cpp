@@ -452,13 +452,13 @@ bool JetSystem::SetUpTauJet(int bac_fake, int ComponentQ)
     int ComponentQFinal=0;
     if ( bac_fake == 0 && ComponentQ > 0)
     {
-        ComponentQFinal = 1;
+        ComponentQFinal = ComponentQ;
     }
     for (int i = 0; i < NTauJets; ++i)
     {
         TauJet tautemp(twopi);
         //cout<<"Here3"<<endl;
-        good = tautemp.SetUpComponentOld((Jet *)farray->At(IndexTauJets[i]),ComponentQFinal);
+        good = tautemp.SetUpComponent((Jet *)farray->At(IndexTauJets[i]),ComponentQFinal);
         //cout<<"Here4"<<endl;
         if (good)
         {
@@ -563,6 +563,23 @@ bool TauJet::SetUpComponent(Jet *jet, int ComponentQ)
         VisP = jet->P4();
         return true;
     }
+    if (ComponentQ == 10 || ComponentQ == 11)
+    {
+        return SetUpComponentParticles(jet,ComponentQ);
+    }
+    else if (ComponentQ == 20)
+    {
+        return SetUpComponentConstituents(jet,ComponentQ);
+    }
+    else
+    {
+        return true;
+    }
+
+}
+
+bool TauJet::SetUpComponentConstituents(Jet *jet, int ComponentQ)
+{
     TLorentzVector picMax;
     TLorentzVector photon1,photon2,photonbothV;
     TObject *object;
@@ -670,14 +687,8 @@ bool TauJet::SetUpComponent(Jet *jet, int ComponentQ)
 // Following is the Old(and probably wrong) method to get the Tau-jets Component
 // Using the Particles in Jet (But these Particles are not smeared yet)
 // We add smearing by ourself.
-bool TauJet::SetUpComponentOld(Jet *jet, int ComponentQ)
+bool TauJet::SetUpComponentParticles(Jet *jet, int ComponentQ)
 {
-    if (!ComponentQ)
-    {
-        charge = jet->Charge;
-        VisP = jet->P4();
-        return true;
-    }
     TLorentzVector picMax;
     TLorentzVector photon1,photon2;
     TObject *object;
@@ -734,9 +745,12 @@ bool TauJet::SetUpComponentOld(Jet *jet, int ComponentQ)
         charge = 0;
         return false;
     }
-    TrackPTSmearing(picMax);
-    ECalEnergySmearing(photon1);
-    ECalEnergySmearing(photon2);
+    if (ComponentQ == 11)
+    {
+        TrackPTSmearing(picMax);
+        ECalEnergySmearing(photon1);
+        ECalEnergySmearing(photon2);
+    }
     Pic = picMax;
     Pi0 = photon1 + photon2;
     charge = pidpic1>0?1:-1;
