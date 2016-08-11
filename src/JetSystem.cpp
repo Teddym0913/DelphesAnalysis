@@ -563,7 +563,7 @@ bool TauJet::SetUpComponent(Jet *jet, int ComponentQ)
         VisP = jet->P4();
         return true;
     }
-    if (ComponentQ == 10 || ComponentQ == 11)
+    if (ComponentQ == 10 || ComponentQ == 11 || ComponentQ == 12)
     {
         return SetUpComponentParticles(jet,ComponentQ);
     }
@@ -745,11 +745,11 @@ bool TauJet::SetUpComponentParticles(Jet *jet, int ComponentQ)
         charge = 0;
         return false;
     }
-    if (ComponentQ == 11)
+    if (ComponentQ >= 11)
     {
-        TrackPTSmearing(picMax);
-        ECalEnergySmearing(photon1);
-        ECalEnergySmearing(photon2);
+        fSmearing.TrackPTSmearing(picMax);
+        fSmearing.ECalEnergySmearing(photon1,ComponentQ);
+        fSmearing.ECalEnergySmearing(photon2,ComponentQ);
     }
     Pic = picMax;
     Pi0 = photon1 + photon2;

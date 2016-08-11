@@ -35,6 +35,7 @@ public:
     TLorentzVector PAppro; // The total tau momentum under the colinear approximation
     TLorentzVector TauTrue;
     TauMode fmode;
+    Smearing fSmearing;
 
 };
 
