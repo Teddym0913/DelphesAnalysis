@@ -23,7 +23,8 @@ public:
 
     //bool SetUpComponentPiMass(Jet *j1, int ComponentQ);
     bool SetUpComponent(Jet *j1, int ComponentQ);
-    bool SetUpComponentOld(Jet *j1, int ComponentQ);
+    bool SetUpComponentConstituents(Jet *j1, int ComponentQ);
+    bool SetUpComponentParticles(Jet *j1, int ComponentQ);
 
 //private:
     int charge;
@@ -34,6 +35,7 @@ public:
     TLorentzVector PAppro; // The total tau momentum under the colinear approximation
     TLorentzVector TauTrue;
     TauMode fmode;
+    Smearing fSmearing;
 
 };
 

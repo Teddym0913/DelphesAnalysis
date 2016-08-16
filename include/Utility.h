@@ -4,10 +4,16 @@
 #include "TRandom3.h"
 #include "classes/DelphesFormula.h"
 
-void TrackPTSmearing(TLorentzVector &v1);
+class Smearing
+{
+public:
+    Smearing();
+    ~Smearing(){delete fFormulaTrack;delete fFormulaECal;}
 
-double LogNormal(double mean,double sigma);
-
-void ECalEnergySmearing(TLorentzVector &v1);
-
+    DelphesFormula *fFormulaTrack;
+    DelphesFormula *fFormulaECal;
+    void TrackPTSmearing(TLorentzVector &v1);
+    double LogNormal(double mean,double sigma);
+    void ECalEnergySmearing(TLorentzVector &v1,int flags);
+};
 #endif
