@@ -26,7 +26,7 @@ void JetSystem::Update(int bac_fake, BasicCuts cuts)
     fakeindex.clear();
     if (bac_fake>0)
     {
-        while(fakeindex.size()<bac_fake)
+        while((fakeindex.size()<bac_fake && fakeindex.size()<Ntotal))
         {
             int index = gRandom->Uniform()*Ntotal;
             bool good =1;
@@ -38,6 +38,7 @@ void JetSystem::Update(int bac_fake, BasicCuts cuts)
             {
                 fakeindex.push_back(index);
             }
+            //cout<<fakeindex.size()<<endl;
         }
     }
     // if (vbfQ == 1)
@@ -74,14 +75,22 @@ void JetSystem::Update(int bac_fake, BasicCuts cuts)
         isBjet = (((Jet*)farray->At(ieve))->BTag & (1<<0));
         if (bac_fake > 0)
         {
-            if (ifake<bac_fake && ieve == fakeindex[ifake])
+            if (ifake<bac_fake)
             {
-                isTaujet = 1;
-                ifake++;
-            }
-            else
-            {
-                isTaujet = 0;
+                int good=0;
+                for (int indexfake = 0; indexfake < bac_fake; ++indexfake)
+                {
+                    good += (ieve == fakeindex[indexfake]);
+                }
+                if (good)
+                {
+                    isTaujet = 1;
+                    ifake++;
+                }
+                else
+                {
+                    isTaujet = 0;
+                }
             }
         }
         else
