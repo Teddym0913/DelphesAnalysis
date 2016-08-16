@@ -6,4 +6,5 @@
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+Delphes_Check.cpp
 Delphes_Analysis
