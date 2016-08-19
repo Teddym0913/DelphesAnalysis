@@ -13,7 +13,7 @@ public:
 
     int NEvents;
     double Weight;
-
+    int PassQ;
 
     int METInTrans;
     int EtaTauInVBF;

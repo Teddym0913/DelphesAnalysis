@@ -154,7 +154,7 @@ int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sig
         if (good)
         {
           outEvent->SetVariables();
-          t1->Fill();
+          //t1->Fill();
           outEvent->SetCuts(cuts_ad,PassQ,cate);
         }
         for (int ipass = 0; ipass < PassQ.size(); ++ipass)
@@ -164,10 +164,10 @@ int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sig
             PassQ[ipass]*=PassQ[ipass-1];
           }
           fills = PassQ[ipass]*weight;
-          if (fakeQ > 0 && ipass>=2)
+          if (fakeQ > 0 && ipass>=5)
           {
             int njettotal = eachEvent->fJet->Ntotal;
-            if (njettotal<2)
+            if (njettotal<fakeQ)
             {
               fills = 0;
             }
@@ -175,6 +175,11 @@ int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sig
             {
               fills = fills*pow(0.01,fakeQ)*pow(0.99,njettotal-fakeQ)*fac[njettotal]/(fac[njettotal-fakeQ]*fac[fakeQ]);
             }
+          }
+          if (good)
+          {
+            outEvent->PassQ = PassQ[PassQ.size()-1];
+            t1->Fill();
           }
           h1->Fill(ipass+1.,fills);
         }

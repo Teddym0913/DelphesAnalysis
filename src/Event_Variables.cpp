@@ -20,6 +20,7 @@ Event_Variables::Event_Variables()
     dEtaVBFJets=0;
     CPPhi4PiSys=0;
     CPPhiImP=0;
+    PassQ=0;
     
     fevent=NULL;
 }
@@ -40,6 +41,8 @@ Event_Variables::Event_Variables(Event_Self *event)
     dEtaVBFJets=0;
     CPPhi4PiSys=0;
     CPPhiImP=0;
+
+    PassQ=0;
 
     fevent = event;
 }

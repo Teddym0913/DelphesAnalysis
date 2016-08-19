@@ -1,6 +1,8 @@
-1 10
+2 10
+0 0.88 sig_hz_CP0 ~/workingspace/HiggsTauTau/ImPTest/Delphes/CP0_delphes*.root
+0 0.88 sig_hz_CP0x785 ~/workingspace/HiggsTauTau/ImPTest/Delphes/CP0x785_delphes*.root
+0 0.7617 sig_hz ~/workingspace/HiggsTauTau/VH/8TeV/hz_delphes_events.root
 2 1708000 bac_zjj ~/workingspace/MC-package/MG5_aMC_v2_4_2/TEDWORK/pp_z_jj_matched/Events/run_8TeV_Default/tag_1_delphes_events.root
-0 0.7617 sig_hz ~/workingspace/MC-package/MG5_aMC_v2_4_2/TEDWORK/pp_hz_z_ll_h_tautau/Events/run_Default/tag_1_delphes_events.root
 0 21.71 bac_zz ~/workingspace/MC-package/MG5_aMC_v2_4_2/TEDWORK/pp_zz_z_ll_z_tautau/Events/run_Default/tag_1_delphes_events.root
 2 1708000 bac_zjj ~/workingspace/MC-package/MG5_aMC_v2_4_2/TEDWORK/pp_z_jj_matched/Events/run_8TeV_Default/tag_1_delphes_events.root
 0 0.88 sig_hz_CP0 ~/workingspace/HiggsTauTau/ImPTest/Delphes/CP0_delphes*.root
