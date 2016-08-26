@@ -5,7 +5,7 @@ Basic Cuts:
         NofObject 0 -1  ## Min<=  <=Max (minus mean no limit on that side)
         NofBJets 0 0 ##
         NofTauJets 2 2 ##
-        NofNormalJets 0 -1 ## Not including B/Tau/VBF jets
+        NofNormalJets 0 0 ## Not including B/Tau/VBF jets
         PTmin 20 ## Minimal PT 
         Eta -2.5 0.0 0.0 2.5 ## Eta has two range (1st,2nd)+(3rd,4th)
         LeadingPT 0 ## The minimal PT for Leading Jets (all jets, no VBF Jets if in VBF category)
@@ -14,7 +14,7 @@ Basic Cuts:
         LeadingNormalPT 0 ##
         dRJJ 0.4 ## The minimal dR between two Jets;
         dPhiJMET 0.0 1.0  ## Remove the Jet when its dPhi with MET less than the first one, if there is still jet whose dPhi with MET is less than the second then return false 
-        TauComponentQ 20 ## 0 for do not care about the component
+        TauComponentQ 0 ## 0 for do not care about the component
                         ## 10 for Particles without smearing
                         ## 11 for Particles with Only PT E smearing
                         ## 12 for Particles with PT E smearing and also eta phi smearing for neutral particles

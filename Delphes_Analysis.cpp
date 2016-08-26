@@ -80,7 +80,7 @@ double CPPhi(TauJet tau1, TauJet tau2)
    return angle;
 }
 
-int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sigma,int cate)
+int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sigma,int cate)
 {
     BasicCuts cuts_self;
     AdvancedCuts cuts_ad;
@@ -129,14 +129,15 @@ int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sig
     t1->Branch("Event","Event_Variables",&outEvent);
     int good;
     int count=0;
-    double weight;
-    double fills;
+    double weight_cs;
+    double fills_ge,fills_cs;
     int Njets;
-    TH1F *h1 = new TH1F(channel_name.c_str(),"",30,0,30);
+    TH1F *h1 = new TH1F((channel_name+"_GE").c_str(),"Generated Events",30,0,30);
+    TH1F *h2 = new TH1F((channel_name+"_CS").c_str(),"Cross Section",30,0,30);
     //TH1F *h2 = new TH1F("h2","",50,50,200);
     // int i = 8859;
-    weight = sigma/((double)allEntries);
-    weight = 1;
+    weight_cs = sigma/((double)allEntries);
+    //weight_ge = 1;
     for (int i = 0; i < allEntries; ++i)
     {
         //int i = 31;
@@ -163,35 +164,49 @@ int Analysis(string inputfile, string channel_name,TH1F *h2,int fakeQ,double sig
           {
             PassQ[ipass]*=PassQ[ipass-1];
           }
-          fills = PassQ[ipass]*weight;
+          fills_ge = PassQ[ipass];
+          fills_cs = fills_ge*weight_cs;
           if (fakeQ > 0 && ipass>=5)
           {
             int njettotal = eachEvent->fJet->Ntotal;
             if (njettotal<fakeQ)
             {
-              fills = 0;
+              fills_ge = 0;
+              fills_cs = 0;
             }
             else
             {
-              fills = fills*pow(0.01,fakeQ)*pow(0.99,njettotal-fakeQ)*fac[njettotal]/(fac[njettotal-fakeQ]*fac[fakeQ]);
+              fills_ge = fills_ge*pow(0.01,fakeQ)*pow(0.99,njettotal-fakeQ)*fac[njettotal]/(fac[njettotal-fakeQ]*fac[fakeQ]);
+              fills_cs = fills_ge*weight_cs;
             }
           }
           if (good)
           {
             outEvent->PassQ = PassQ[PassQ.size()-1];
             t1->Fill();
+            if (outEvent->PassQ)
+            {
+              p2->Fill(outEvent->CPPhi4PiSys);
+            }
           }
-          h1->Fill(ipass+1.,fills);
+          h1->Fill(ipass+1.,fills_ge);
+          h2->Fill(ipass+1.,fills_cs);
         }
-        h1->Fill(0.,weight);   
+        h1->Fill(0.,1);
+        h2->Fill(0.,weight_cs);   
     }
     //p1->SetLineColor(i+1);
     h1->SetLineWidth(2);
     h1->SetYTitle("Event Counts");
     h1->SetTitleSize(0.05,"Y");
     h1->SetTitleOffset(1.1,"Y");
+    h2->SetLineWidth(2);
+    h2->SetYTitle("Cross Section [fb]");
+    h2->SetTitleSize(0.05,"Y");
+    h2->SetTitleOffset(1.1,"Y");
     t1->Write();
     h1->Write();
+    h2->Write();
     cout<<channel_name<<" Done!"<<endl;
     //h2->Write();
     // f1->Close();
