@@ -121,73 +121,7 @@ void AdvancedCuts::Clear()
 
 AdvancedCuts::AdvancedCuts(const char *file)
 {
-    ifstream infile(file,ios::in);
-    string temp;
-    while(infile)
-    {
-        infile>>temp;
-        if (temp == "Advanced")
-        {
-            infile.ignore(999,'\n');
-            string name;
-            while(infile)
-            {
-                infile>>name;
-                if(name == "PtSumTauMin")
-                {
-                    infile>>PtSumTauMin;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "dRtautau")
-                {
-                    infile>>dRtautau[0]>>dRtautau[1];
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "dEtatautau")
-                {
-                    infile>>dEtatautau;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "PtHiggsMin")
-                {
-                    infile>>PtHiggsMin;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "METInTransQ")
-                {
-                    infile>>METInTransQ;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "EtaTauInVBFQ")
-                {
-                    infile>>EtaTauInVBFQ;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "NCuts")
-                {
-                    infile>>NCuts;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "{" || name == "#" || name == "##")  
-                {
-                    infile.ignore(999,'\n');
-                }
-                else if (name =="}")
-                {
-                    infile.ignore(999,'\n');
-                    break;
-                }
-                else
-                {
-                    infile.ignore(999,'\n');
-                }
-            }
-        }
-        else
-        {
-            infile.ignore(999,'\n');
-        }
-    }
+    ReadFile(file);
 }
 
 void AdvancedCuts::ReadFile(const char *file)
@@ -202,45 +136,49 @@ void AdvancedCuts::ReadFile(const char *file)
         {
             infile.ignore(999,'\n');
             string name;
+            string signs;
+            double value;
+            int nflows;
             while(infile)
             {
                 infile>>name;
-                if(name == "PtSumTauMin")
-                {
-                    infile>>PtSumTauMin;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "dRtautau")
-                {
-                    infile>>dRtautau[0]>>dRtautau[1];
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "dEtatautau")
-                {
-                    infile>>dEtatautau;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "PtHiggsMin")
-                {
-                    infile>>PtHiggsMin;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "METInTransQ")
-                {
-                    infile>>METInTransQ;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "EtaTauInVBFQ")
-                {
-                    infile>>EtaTauInVBFQ;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "TightorLooseQ")
-                {
-                    infile>>TightorLooseQ;
-                    infile.ignore(999,'\n');
-                }
-                else if (name == "NCuts")
+                // if(name == "PtSumTauMin")
+                // {
+                //     infile>>PtSumTauMin;
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "dRtautau")
+                // {
+                //     infile>>dRtautau[0]>>dRtautau[1];
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "dEtatautau")
+                // {
+                //     infile>>dEtatautau;
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "PtHiggsMin")
+                // {
+                //     infile>>PtHiggsMin;
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "METInTransQ")
+                // {
+                //     infile>>METInTransQ;
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "EtaTauInVBFQ")
+                // {
+                //     infile>>EtaTauInVBFQ;
+                //     infile.ignore(999,'\n');
+                // }
+                // else if (name == "TightorLooseQ")
+                // {
+                //     infile>>TightorLooseQ;
+                //     infile.ignore(999,'\n');
+                // }
+                // else 
+                if (name == "NCuts")
                 {
                     infile>>NCuts;
                     infile.ignore(999,'\n');
@@ -256,6 +194,12 @@ void AdvancedCuts::ReadFile(const char *file)
                 }
                 else
                 {
+                    infile>>nflows;
+                    for (int iflows = 0; iflows < nflows; ++iflows)
+                    {
+                        infile>>signs>>value;
+                        AdCuts.insert(make_pair(make_pair(name,signs),value));
+                    }
                     infile.ignore(999,'\n');
                 }
             }

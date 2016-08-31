@@ -106,6 +106,8 @@ public:
     void ReadFile(const char *file);
     void Clear();
     int NCuts;
+    typedef map<pair<string,string>, double> CutsCollection;
+    CutsCollection AdCuts;
     double PtSumTauMin;
     double dRtautau[2];
     double dEtatautau;

@@ -1,0 +1,3 @@
+2 20
+0 350 hz_CP0x785_default ./root-results/Granularity_CP0x785.root
+0 350 hz_CP0x785_Fine ./root-results/Granularity_CP0x785.root

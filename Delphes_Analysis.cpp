@@ -20,92 +20,77 @@ using namespace std;
 
 double fac[11] = {1.,1.,2.,6.,24.,120.,720.,5040.,40320.,362880.,3628800.};
 
-// TLorentzVector BoostSelf(TLorentzVector v1, TLorentzVector v2) // Boost v1 to the rest frame of v2
+// double CPPhi(TauJet tau1, TauJet tau2)
 // {
-//   double beta = v2.Beta();
-//   double gamma = v2.Gamma();
+//     TLorentzVector pic1 = tau1.Pic;
+//     TLorentzVector pic2 = tau2.Pic;
+//     TLorentzVector pi01 = tau1.Pi0;
+//     TLorentzVector pi02 = tau2.Pi0;
+//     double selection = (pic1.Energy()-pi01.Energy())*(pic2.Energy()-pi02.Energy());
+//    TLorentzVector pictotal = pic1 + pic2;
+//    //boost = pictotal.BoostVector();
+//    pic1=BoostSelf(pic1,pictotal);
+//    pic2=BoostSelf(pic2,pictotal);
+//    pi01=BoostSelf(pi01,pictotal);
+//    pi02=BoostSelf(pi02,pictotal);
 
-//   TVector3 unit = v2.Vect();
-//   unit = (1.0/unit.Mag())*unit;
-
-//   double Erest = gamma*(v1.Energy()-beta*(unit.Dot(v1.Vect())));
-//   TVector3 prest = v1.Vect() + (gamma-1)*(unit.Dot(v1.Vect()))*unit - ( gamma * beta * v1.Energy())*unit;
-
-//   return TLorentzVector(prest,Erest);
-
-// }
-
-double CPPhi(TauJet tau1, TauJet tau2)
-{
-    TLorentzVector pic1 = tau1.Pic;
-    TLorentzVector pic2 = tau2.Pic;
-    TLorentzVector pi01 = tau1.Pi0;
-    TLorentzVector pi02 = tau2.Pi0;
-    double selection = (pic1.Energy()-pi01.Energy())*(pic2.Energy()-pi02.Energy());
-   TLorentzVector pictotal = pic1 + pic2;
-   //boost = pictotal.BoostVector();
-   pic1=BoostSelf(pic1,pictotal);
-   pic2=BoostSelf(pic2,pictotal);
-   pi01=BoostSelf(pi01,pictotal);
-   pi02=BoostSelf(pi02,pictotal);
-
-   //TLorentzVector check = pic1+pic2;
-   //cout<<check.Px()<<" "<<check.Py()<<"  "<<check.Pz()<<endl;
+//    //TLorentzVector check = pic1+pic2;
+//    //cout<<check.Px()<<" "<<check.Py()<<"  "<<check.Pz()<<endl;
 
    
-   TVector3 z = pic1.Vect();
-   TVector3 pi013 = pi01.Vect();
-   TVector3 pi023 = pi02.Vect();
+//    TVector3 z = pic1.Vect();
+//    TVector3 pi013 = pi01.Vect();
+//    TVector3 pi023 = pi02.Vect();
 
-   TVector3 plane1 = (z.Cross(pi013)).Cross(z);
-   TVector3 plane2 = (z.Cross(pi023)).Cross(z);
+//    TVector3 plane1 = (z.Cross(pi013)).Cross(z);
+//    TVector3 plane2 = (z.Cross(pi023)).Cross(z);
 
-   double angle = acos(plane1.Dot(plane2)/(plane1.Mag()*plane2.Mag()));
-   double sign = (plane1.Cross(plane2)).Dot(z);
-   if (sign < 0)
-   {
-     angle = -angle;
-   }
-   if (selection < 0)
-   {
-      if (angle > 0)
-      {
-        angle = angle - TMath::Pi();
-      }
-      else
-      {
-        angle = angle + TMath::Pi();
-      }
-   }
-   return angle;
-}
+//    double angle = acos(plane1.Dot(plane2)/(plane1.Mag()*plane2.Mag()));
+//    double sign = (plane1.Cross(plane2)).Dot(z);
+//    if (sign < 0)
+//    {
+//      angle = -angle;
+//    }
+//    if (selection < 0)
+//    {
+//       if (angle > 0)
+//       {
+//         angle = angle - TMath::Pi();
+//       }
+//       else
+//       {
+//         angle = angle + TMath::Pi();
+//       }
+//    }
+//    return angle;
+// }
 
-int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sigma,int cate)
+int Basic_Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sigma,int cate)
 {
     BasicCuts cuts_self;
-    AdvancedCuts cuts_ad;
+    //AdvancedCuts cuts_ad;
     if (cate == 10)
     {
         cuts_self.ReadFile("./config/Cuts_card_VH.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
+        //cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
         cout<<"Analysing VH topology."<<endl;
     }
     else if (cate == 20)
     {
         cuts_self.ReadFile("./config/Cuts_card_VBF_highPT.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
+        //cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
         cout<<"Analysing VBF High PT topology."<<endl;
     }
     else if (cate == 21)
     {
         cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
+        //cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
         cout<<"Analysing VBF Low PT tight topology."<<endl;
     }
     else if (cate == 22)
     {
         cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
+        //cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
         cout<<"Analysing VBF Low PT loose topology."<<endl;
     }
     else
@@ -154,8 +139,10 @@ int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sig
         if (good)
         {
           outEvent->SetVariables();
-          //t1->Fill();
-          outEvent->SetCuts(cuts_ad,PassQ,cate);
+          outEvent->Weight = weight_cs;
+          outEvent->PassQ = -1;
+          t1->Fill();
+          //outEvent->SetCuts(cuts_ad,PassQ,cate);
         }
         for (int ipass = 0; ipass < PassQ.size(); ++ipass)
         {
@@ -179,15 +166,6 @@ int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sig
               fills_cs = fills_ge*weight_cs;
             }
           }
-          if (good)
-          {
-            outEvent->PassQ = PassQ[PassQ.size()-1];
-            t1->Fill();
-            if (outEvent->PassQ)
-            {
-              p2->Fill(outEvent->CPPhi4PiSys);
-            }
-          }
           h1->Fill(ipass+1.,fills_ge);
           h2->Fill(ipass+1.,fills_cs);
         }
@@ -206,7 +184,7 @@ int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sig
     t1->Write();
     h1->Write();
     h2->Write();
-    cout<<channel_name<<" Done!"<<endl;
+    cout<<channel_name<<" Basic Analysis Done!"<<endl;
     //h2->Write();
     // f1->Close();
     //h1->Scale(sigma/(double)allEntries);
@@ -214,12 +192,71 @@ int Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sig
 	  return 0;
 }
 
+double Advanced_Analysis(string inputfile, string channel_name,int cate)
+{
+    AdvancedCuts cuts_ad;
+    if (cate == 10)
+    {
+        // cuts_self.ReadFile("./config/Cuts_card_VH.dat");
+        cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
+        cout<<"Analysing VH topology."<<endl;
+    }
+    else if (cate == 20)
+    {
+        // cuts_self.ReadFile("./config/Cuts_card_VBF_highPT.dat");
+        cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
+        cout<<"Analysing VBF High PT topology."<<endl;
+    }
+    else if (cate == 21)
+    {
+        // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
+        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
+        cout<<"Analysing VBF Low PT tight topology."<<endl;
+    }
+    else if (cate == 22)
+    {
+        // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
+        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
+        cout<<"Analysing VBF Low PT loose topology."<<endl;
+    }
+    else
+    {
+      cout<<"Can not recognize the ananlysis mode"<<endl;
+      return -1;
+    }
+
+    TFile *f1 = new TFile(inputfile.c_str());
+    TTree *t1 = (TTree*) f1->Get((channel_name+"_Af_Basic").c_str());
+    Event_Variables *event = new Event_Variables();
+    t1->SetBranchAddress("Event",&event);
+    stringstream selections;
+    string cuts;
+    AdvancedCuts::CutsCollection::iterator iteAd;
+    selections<<"Weight*(";
+    for (iteAd = cuts_ad.AdCuts.begin(); iteAd != cuts_ad.AdCuts.end(); ++iteAd)
+    {
+       selections<<iteAd->first.first<<iteAd->first.second<<iteAd->second<<"&&";
+    }
+    selections<<"1==1)";
+    selections>>cuts;
+    cout<<"Cuts are: "<<cuts<<endl;
+    //return 0;
+    t1->Draw("PassQ>>Count(10,0,10)",cuts.c_str());
+    gPad->Update();
+    TH1F *htemp = (TH1F*) gPad->GetPrimitive("Count");
+    double cs_left = htemp->Integral();
+
+    return cs_left;
+}
+
 int main(int argc, char const *argv[])
 {
-  if (argc < 3)
+  if (argc < 4)
   {
       cout<<"Usage:  "<<endl;
-      cout<<argv[0]<<"  input_config  output_root_files"<<endl;
+      cout<<argv[0]<<"  Basic_or_Advanced  input_config  output_files"<<endl;
+      cout<<argv[0]<<"  0  input_config  Basic_output_root"<<endl;
+      cout<<argv[0]<<"  1  input_config  Advanced_output_dat"<<endl;
       return 0;
   }
   gStyle->SetOptStat("100000");
@@ -232,56 +269,77 @@ int main(int argc, char const *argv[])
   gStyle->SetPadRightMargin(0.14);
   gStyle->SetPadBottomMargin(0.16);
   gStyle->SetPadLeftMargin(0.18);
-  
-  TFile *f1 = new TFile(argv[2],"recreate");
-  ifstream input(argv[1]);
-  int channel=0;
-  int cate;
-  input >> channel >> cate;
-  input.ignore(999,'\n');
-  int fakeQ=0;
-  double sigma;
-  string channel_name;
-  string channel_path;
-  //vector<TH1F *> histo;
-  TCanvas *c1 = new TCanvas("c1","",800,600);
-  TLegend *legs = new TLegend(0.6206897,0.5318143,0.8778736,0.9023207,NULL,"brNDC");
-  legs->SetBorderSize(1);
-  legs->SetTextFont(32);
-  legs->SetTextSize(0.05);
-  legs->SetLineColor(0);
-  legs->SetLineStyle(1);
-  legs->SetLineWidth(1);
-  legs->SetFillColor(0);
-  legs->SetFillStyle(0);
-  for (int i = 0; i < channel; ++i)
+
+
+  int BorA = atoi(argv[1]);
+  if (BorA==0)
   {
+    TFile *f1 = new TFile(argv[3],"recreate");
+    ifstream input(argv[2]);
+    int channel=0;
+    int cate;
+    input >> channel >> cate;
+    input.ignore(999,'\n');
+    int fakeQ=0;
+    double sigma;
+    string channel_name;
+    string channel_path;
+    //vector<TH1F *> histo;
+    TCanvas *c1 = new TCanvas("c1","",800,600);
+    TLegend *legs = new TLegend(0.6206897,0.5318143,0.8778736,0.9023207,NULL,"brNDC");
+    legs->SetBorderSize(1);
+    legs->SetTextFont(32);
+    legs->SetTextSize(0.05);
+    legs->SetLineColor(0);
+    legs->SetLineStyle(1);
+    legs->SetLineWidth(1);
+    legs->SetFillColor(0);
+    legs->SetFillStyle(0);
+    for (int i = 0; i < channel; ++i)
+    {
       input>>fakeQ>>sigma>>channel_name>>channel_path;
       input.ignore(999,'\n');
       TH1F *p2 = new TH1F((channel_name+"_PhiCP").c_str(),"",2,-3.15,3.15);
-      Analysis(channel_path,channel_name,p2,fakeQ,sigma,cate);
+      Basic_Analysis(channel_path,channel_name,p2,fakeQ,sigma,cate);
       p2->SetLineColor(i+1);
       p2->SetLineWidth(2);
-      // p1->SetYTitle("Event Counts");
-      // p1->SetTitleSize(0.05,"Y");
-      // p1->SetTitleOffset(1.1,"Y");
-      // f1->cd();
-      // p1->Write();
       p2->Write();
       p2->Draw("SAME");
       legs->AddEntry(p2,channel_name.c_str(),"l");
+    }
+    legs->Draw();
+    TLatex T1;
+    T1.SetTextSize(0.04);
+    T1.DrawLatex(0,100,"Including Detector Effects");
+    T1.DrawLatex(0,0,"Unrenormalized According to #sigma");
+    f1->cd();
+    c1->Write();
+    f1->Close();
+    return 0;
   }
-  legs->Draw();
-  TLatex T1;
-  T1.SetTextSize(0.04);
-  T1.DrawLatex(0,100,"Including Detector Effects");
-  T1.DrawLatex(0,0,"Unrenormalized According to #sigma");
-  f1->cd();
-  c1->Write();
-  f1->Close();
-
-
-  return 0;
+  else if (BorA == 1)
+  {
+    ifstream input(argv[2]);
+    ofstream output(argv[3]);
+    int channel=0;
+    int cate;
+    input >> channel >> cate;
+    input.ignore(999,'\n');
+    int fakeQ=0;
+    double sigma;
+    string channel_name;
+    string channel_path;
+    double cs_left;
+    for (int i = 0; i < channel; ++i)
+    {
+      input>>fakeQ>>sigma>>channel_name>>channel_path;
+      input.ignore(999,'\n');
+      //TH1F *p2 = new TH1F((channel_name+"_PhiCP").c_str(),"",2,-3.15,3.15);
+      cs_left=Advanced_Analysis(channel_path,channel_name,cate);
+      output<<channel_name<<"  CS_Left[fb]: "<<cs_left<<endl;
+    }
+  }
+  
 }
 
 
