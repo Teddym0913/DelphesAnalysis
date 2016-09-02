@@ -241,7 +241,7 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate)
     selections>>cuts;
     cout<<"Cuts are: "<<cuts<<endl;
     //return 0;
-    t1->Draw("PassQ>>Count(10,0,10)",cuts.c_str());
+    t1->Draw("PassQ>>Count(12,-2,10)",cuts.c_str());
     gPad->Update();
     TH1F *htemp = (TH1F*) gPad->GetPrimitive("Count");
     double cs_left = htemp->Integral();
@@ -338,6 +338,15 @@ int main(int argc, char const *argv[])
       cs_left=Advanced_Analysis(channel_path,channel_name,cate);
       output<<channel_name<<"  CS_Left[fb]: "<<cs_left<<endl;
     }
+    return 0;
+  }
+  else
+  {
+      cout<<"Usage:  "<<endl;
+      cout<<argv[0]<<"  Basic_or_Advanced  input_config  output_files"<<endl;
+      cout<<argv[0]<<"  0  input_config  Basic_output_root"<<endl;
+      cout<<argv[0]<<"  1  input_config  Advanced_output_dat"<<endl;
+      return 0;
   }
   
 }

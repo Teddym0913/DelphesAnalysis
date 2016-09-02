@@ -14,7 +14,7 @@ Basic Cuts:
         LeadingNormalPT 0 ##
         dRJJ 0.4 ## The minimal dR between two Jets;
         dPhiJMET 0.0 1.0  ## Remove the Jet when its dPhi with MET less than the first one, if there is still jet whose dPhi with MET is less than the second then return false 
-        TauComponentQ 0 ## 0 for do not care about the component
+        TauComponentQ 11 ## 0 for do not care about the component
                         ## 10 for Particles without smearing
                         ## 11 for Particles with Only PT E smearing
                         ## 12 for Particles with PT E smearing and also eta phi smearing for neutral particles
@@ -35,9 +35,9 @@ Basic Cuts:
     {{
         ApplyQ 1 ##
         NofForwardObj 2 ##
-        PTofForwardObj 2 50 30 ##
-        deltaEta 2.6 ##
-        mjjmin 250 ##
+        PTofForwardObj 2 80 70 ##
+        deltaEta 3.6 ##
+        mjjmin 1000 ##
         ## What should we use for VBF cuts?
     }}
     MET 20 ##    
@@ -49,7 +49,8 @@ Advanced Cuts:
     dRtautau 2 >= 0.8 <= 1.5
     dEtatautau 1 <= 1.5
     PtHiggs 1 >= 140
+    MET 1 >= 50
     METInTrans 1 >= 1
-    EtaTauInVBF 1 >= -1
+    EtaTauInVBF 1 >= 1
     PtSumTauMin -100
 }

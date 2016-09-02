@@ -18,6 +18,8 @@ Event_Variables::Event_Variables()
     MassTauTau=0;
     MassVBFJets=0;
     dEtaVBFJets=0;
+    Ptj1=0;
+    Ptj2=0;
     CPPhi4PiSys=0;
     CPPhiImP=0;
     PassQ=0;
@@ -39,6 +41,8 @@ Event_Variables::Event_Variables(Event_Self *event)
     MassTauTau=0;
     MassVBFJets=0;
     dEtaVBFJets=0;
+    Ptj1=0;
+    Ptj2=0;
     CPPhi4PiSys=0;
     CPPhiImP=0;
 
