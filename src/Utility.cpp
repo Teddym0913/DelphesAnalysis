@@ -1,5 +1,16 @@
 #include "Utility.h"
 
+double PhiCenters[360];
+double EtaCenters[500];
+for (int i = 0; i < 360; ++i)
+{
+    PhiCenters[i]=((double)i+0.5)/180.0*3.1415926;
+}
+for (int i = 0; i < 500; ++i)
+{
+    EtaCenters[i]= i*0.02 - 4.99;
+}
+
 Smearing::Smearing()
 {
     fFormulaTrack = new DelphesFormula;
@@ -45,8 +56,10 @@ void Smearing::ECalEnergySmearing(TLorentzVector &v1,int flags)
     double e = v1.E();
     if (flags == 12)
     {
-        eta = gRandom->Uniform(eta-0.05,eta+0.05);
-        phi = gRandom->Uniform(phi-5.0/180.0*3.14159,phi+5.0/180.0*3.14159);
+        // eta = gRandom->Uniform(eta-0.05,eta+0.05);
+        eta = EtaCenters[(int)((eta+5)/0.02)];
+        // phi = gRandom->Uniform(phi-5.0/180.0*3.14159,phi+5.0/180.0*3.14159);
+        phi = PhiCenters[((int)((phi/(3.1415926)*180)+360))%(360)];
     }
     double sigma = fFormulaECal->Eval(0,eta,0,e);
     e = LogNormal(e,sigma);
