@@ -14,6 +14,7 @@ Event_Variables::Event_Variables()
     dRtautau=0;
     dEtatautau=0;
     PtHiggs=0;
+    MET=0;
     PtSumTauTau=0;
     MassTauTau=0;
     MassVBFJets=0;
@@ -37,6 +38,7 @@ Event_Variables::Event_Variables(Event_Self *event)
     dRtautau=0;
     dEtatautau=0;
     PtHiggs=0;
+    MET=0;
     PtSumTauTau=0;
     MassTauTau=0;
     MassVBFJets=0;
@@ -64,6 +66,7 @@ void Event_Variables::SetVariables()
     dEtaVBFJets=GetdEtaVBFJets();
     CPPhi4PiSys=GetCPPhi4PiSys();
     CPPhiImP=GetCPPhiImp();
+    MET=GetMET();
 }
 
 void Event_Variables::SetCuts(AdvancedCuts cuts, vector<int> &PassQ, int cate)
@@ -289,6 +292,11 @@ int Event_Variables::GetMETInTrans()
   {
     return 0;
   }
+}
+
+double Event_Variables::GetMET()
+{
+  return ((MissingET *)fevent->fMET->farray->At(0))->MET;
 }
 
 int Event_Variables::GetEtaTauInVBF()

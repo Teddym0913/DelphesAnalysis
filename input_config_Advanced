@@ -1,3 +1,4 @@
-2 20
-0 350 hz_CP0x785_default ./root-results/Granularity_CP0x785.root
-0 350 hz_CP0x785_Fine ./root-results/Granularity_CP0x785.root
+3 20 VBF_HighPt
+0 66.66 hjj_vbf_CP0x0 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Analysed/0913/VBF_HighPt_af_basic.root
+0 66.66 hjj_vbf_CP0x785 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Analysed/0913/VBF_HighPt_af_basic.root
+0 7324 zjj_vbf /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Analysed/0913/VBF_HighPt_af_basic.root

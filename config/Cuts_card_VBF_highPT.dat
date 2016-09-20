@@ -45,11 +45,11 @@ Basic Cuts:
 
 Advanced Cuts:
 {
-    NCuts 5
-    dRtautau 2 >= 0.8 <= 1.5
-    dEtatautau 1 <= 1.5
-    PtHiggs 1 >= 140
-    MET 1 >= 50
+    NCuts 6
+    dRtautau 2 >= 0.6 <= 1.0
+    dEtatautau 1 <= 1.0
+    PtHiggs 1 >= 250
+    MET 1 >= 120
     METInTrans 1 >= 1
     EtaTauInVBF 1 >= 1
     PtSumTauMin -100

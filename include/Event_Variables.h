@@ -26,6 +26,7 @@ public:
     double MassVBFJets;
     double Ptj1;
     double Ptj2;
+    double MET;
     double CPPhi4PiSys;
     double CPPhiImP;
 
@@ -39,6 +40,7 @@ public:
     double GetdEtaVBFJets();
     double GetCPPhi4PiSys();
     double GetCPPhiImp();
+    double GetMET();
     int GetMETInTrans();
     int GetEtaTauInVBF();
 

@@ -1,3 +1,4 @@
-2 20
-0 350 sig_hjj_vbf ~/workingspace/HiggsTauTau/VBF/8TeV/hjj_2tau_delphes_*.root
-0 1040760 bac_zjj_vbf ~/workingspace/HiggsTauTau/VBF/8TeV/zjj_2tau_delphes_*.root
+3 20 VBF_HighPt
+0 66.66 hjj_vbf_CP0x0 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/hjj_nomatch_4pi2v_CP0x0_0913/hjj_nomatch_*.root
+0 66.66 hjj_vbf_CP0x785 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/hjj_nomatch_4pi2v_CP0x785_0913/hjj_nomatch_*.root
+0 7324 zjj_vbf /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/zjj_nomatch_4pi2v_0913/zjj_nomatch_*.root
