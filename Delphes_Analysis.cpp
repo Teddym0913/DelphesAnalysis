@@ -157,31 +157,36 @@ int Basic_Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,doub
 	  return 0;
 }
 
-double Advanced_Analysis(string inputfile, string channel_name,int cate)
+double Advanced_Analysis(string inputfile, string channel_name,int cate, char *Log_Dir)
 {
     AdvancedCuts cuts_ad;
+    string CutsFile;
     if (cate == 10)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VH.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
+        // cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
+        CutsFile = "./config/Cuts_card_VH.dat";
         cout<<"Analysing VH topology."<<endl;
     }
     else if (cate == 20)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_highPT.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
+        // cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
+        CutsFile = "./config/Cuts_card_VBF_highPT.dat";
         cout<<"Analysing VBF High PT topology."<<endl;
     }
     else if (cate == 21)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
+        // cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
+        CutsFile = "./config/Cuts_card_VBF_lowPTtight.dat";
         cout<<"Analysing VBF Low PT tight topology."<<endl;
     }
     else if (cate == 22)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
-        cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
+        // cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
+        CutsFile = "./config/Cuts_card_VBF_lowPTloose.dat";
         cout<<"Analysing VBF Low PT loose topology."<<endl;
     }
     else
@@ -189,7 +194,10 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate)
       cout<<"Can not recognize the ananlysis mode"<<endl;
       return -1;
     }
-
+    cuts_ad.ReadFile(CutsFile.c_str());
+    char command_advanced[500];
+    sprintf(command_advanced,"cp %s %s/AdvancedCuts_for_%s.dat",CutsFile.c_str(),Log_Dir,channel_name.c_str());
+    system(command_advanced);
     TFile *f1 = new TFile(inputfile.c_str());
     TTree *t1 = (TTree*) f1->Get((channel_name+"_Af_Basic").c_str());
     Event_Variables *event = new Event_Variables();
@@ -250,7 +258,7 @@ int main(int argc, char const *argv[])
     sprintf(basic_output,"%s/%s_af_basic.root",argv[3],AnalysisName.c_str());
     TFile *f1 = new TFile(basic_output,"recreate");
     char Log_Dir[500];
-    sprintf(Log_Dir,"%s/%s_Logs",argv[3],AnalysisName.c_str());
+    sprintf(Log_Dir,"%s/%s_Basic_Logs",argv[3],AnalysisName.c_str());
     char command_basic[500];
     sprintf(command_basic,"mkdir %s",Log_Dir);
     system(command_basic);
@@ -296,11 +304,21 @@ int main(int argc, char const *argv[])
   else if (BorA == 1)
   {
     ifstream input(argv[2]);
-    ofstream output(argv[3]);
     int channel=0;
     int cate;
-    input >> channel >> cate;
+    string AnalysisName;
+    input >> channel >> cate >> AnalysisName;
     input.ignore(999,'\n');
+    char Advanced_output[500];
+    sprintf(Advanced_output,"%s/%s_Af_Advanced.dat",argv[3],AnalysisName.c_str());
+    ofstream output(Advanced_output);
+    char Log_Dir[500];
+    sprintf(Log_Dir,"%s/%s_Advanced_Logs",argv[3],AnalysisName.c_str());
+    char command_advanced[500];
+    sprintf(command_advanced,"mkdir %s",Log_Dir);
+    system(command_advanced);
+    sprintf(command_advanced,"cp %s %s/input_config_advanced",argv[2],Log_Dir);
+    system(command_advanced);
     int fakeQ=0;
     double sigma;
     string channel_name;
@@ -311,7 +329,7 @@ int main(int argc, char const *argv[])
       input>>fakeQ>>sigma>>channel_name>>channel_path;
       input.ignore(999,'\n');
       //TH1F *p2 = new TH1F((channel_name+"_PhiCP").c_str(),"",2,-3.15,3.15);
-      cs_left=Advanced_Analysis(channel_path,channel_name,cate);
+      cs_left=Advanced_Analysis(channel_path,channel_name,cate,Log_Dir);
       output<<channel_name<<"  CS_Left[fb]: "<<cs_left<<endl;
     }
     return 0;
