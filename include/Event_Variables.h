@@ -24,6 +24,8 @@ public:
     double MassTauTau;
     double dEtaVBFJets;
     double MassVBFJets;
+    double Ptj1;
+    double Ptj2;
     double CPPhi4PiSys;
     double CPPhiImP;
 

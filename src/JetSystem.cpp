@@ -671,8 +671,8 @@ bool TauJet::SetUpComponentConstituents(Jet *jet, int ComponentQ)
 
     if (ptPic<0||((photonPT1<0||photonPT2<0)&&photonBothPT<0))
     {
-        Pic = TLorentzVector::TLorentzVector(0,0,0,0);
-        Pi0 = TLorentzVector::TLorentzVector(0,0,0,0);
+        Pic = TLorentzVector(0,0,0,0);
+        Pi0 = TLorentzVector(0,0,0,0);
         VisP = Pic + Pi0;
         charge = 0;
         return false;
@@ -748,8 +748,8 @@ bool TauJet::SetUpComponentParticles(Jet *jet, int ComponentQ)
 
     if (ptPic<0||photonPT1<0||photonPT2<0)
     {
-        Pic = TLorentzVector::TLorentzVector(0,0,0,0);
-        Pi0 = TLorentzVector::TLorentzVector(0,0,0,0);
+        Pic = TLorentzVector(0,0,0,0);
+        Pi0 = TLorentzVector(0,0,0,0);
         VisP = Pic + Pi0;
         charge = 0;
         return false;

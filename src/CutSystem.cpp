@@ -211,6 +211,21 @@ void AdvancedCuts::ReadFile(const char *file)
     }
 }
 
+string AdvancedCuts::GetAllCuts()
+{
+    stringstream selections;
+    string cuts;
+    CutsCollection::iterator ite;
+    selections<<"Weight*(";
+    for (ite = AdCuts.begin(); ite != AdCuts.end(); ++ite)
+    {
+        selections<<ite->first.first<<ite->first.second<<ite->second<<"&&";
+    }
+    selections<<"1==1)";
+    selections>>cuts;
+    return cuts;
+}
+
 int BasicCuts::Output(const char *file)
 {
     char command[300];

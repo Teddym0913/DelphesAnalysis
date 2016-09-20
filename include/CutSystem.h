@@ -8,6 +8,7 @@
 //#include "LepSys.h"
 #include "TClonesArray.h"
 #include <stdlib.h>
+#include <sstream>
 
 class Cuts
 {
@@ -105,6 +106,7 @@ public:
 
     void ReadFile(const char *file);
     void Clear();
+    string GetAllCuts();
     int NCuts;
     typedef map<pair<string,string>, double> CutsCollection;
     CutsCollection AdCuts;

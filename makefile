@@ -19,7 +19,7 @@ EXTRAHDR =
 ARCH          = linux
 #ARCH          = solarisCC5
 
-DELPHESPATH := /Users/teddy/workingspace/Delphes/Delphes-3.3.0
+DELPHESPATH := /home/teddy/workingspace/MC-package/MG5_aMC_v2_4_3/Delphes
 
 #MT2PATH := /Users/teddy/workingspace/Useful-Package/MT2 
 
