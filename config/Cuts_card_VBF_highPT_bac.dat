@@ -46,14 +46,13 @@ Basic Cuts:
 Advanced Cuts:
 {
     NCuts 8
-    dRtautau 2 >= 0.8 <= 1.5
-    dEtatautau 1 <= 1.5
-    PtHiggs 1 >= 300
-    MET 1 >= 150
+    dRtautau 2 >= 0.6 <= 1.0
+    dEtatautau 1 <= 1.0
+    PtHiggs 1 >= 250
+    MET 1 >= 120
     METInTrans 1 >= 1
     EtaTauInVBF 1 >= 1
-    MassTauTau 1 >= 120
-    MassVBFJets 1 >= 2500
-    dEtaVBFJets 1 >= 5.60000000000000000000
+    MassVBFJets 1 >= 1500
+    dEtaVBFJets 1 >= 4.0
     PtSumTauMin -100
 }

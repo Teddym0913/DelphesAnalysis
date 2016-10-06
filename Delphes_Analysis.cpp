@@ -14,12 +14,15 @@
 #include "modules/Delphes.h"
 #include "classes/DelphesClasses.h"
 #include "classes/DelphesFactory.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 //#include "AdvancedCuts.h"
 #include <sstream>
 using namespace std;
 
 double fac[11] = {1.,1.,2.,6.,24.,120.,720.,5040.,40320.,362880.,3628800.};
-
+void createdir(char *dir);
 int Basic_Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,double sigma,int cate, char *Log_Dir)
 {
     BasicCuts cuts_self;
@@ -61,7 +64,7 @@ int Basic_Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,doub
     cuts_self.ReadFile(CutsFile.c_str());
     char command_basic[500];
     sprintf(command_basic,"cp %s %s/BasicCuts_for_%s.dat",CutsFile.c_str(),Log_Dir,channel_name.c_str());
-    system(command_basic);
+    int status = system(command_basic);
 
     
     TreeReader *reader = new TreeReader("./config/delphes_card.dat");
@@ -166,28 +169,28 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate, char *L
         // cuts_self.ReadFile("./config/Cuts_card_VH.dat");
         // cuts_ad.ReadFile("./config/Cuts_card_VH.dat");
         CutsFile = "./config/Cuts_card_VH.dat";
-        cout<<"Analysing VH topology."<<endl;
+        //cout<<"Analysing VH topology."<<endl;
     }
     else if (cate == 20)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_highPT.dat");
         // cuts_ad.ReadFile("./config/Cuts_card_VBF_highPT.dat");
         CutsFile = "./config/Cuts_card_VBF_highPT.dat";
-        cout<<"Analysing VBF High PT topology."<<endl;
+        //cout<<"Analysing VBF High PT topology."<<endl;
     }
     else if (cate == 21)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
         // cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTtight.dat");
         CutsFile = "./config/Cuts_card_VBF_lowPTtight.dat";
-        cout<<"Analysing VBF Low PT tight topology."<<endl;
+        //cout<<"Analysing VBF Low PT tight topology."<<endl;
     }
     else if (cate == 22)
     {
         // cuts_self.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
         // cuts_ad.ReadFile("./config/Cuts_card_VBF_lowPTloose.dat");
         CutsFile = "./config/Cuts_card_VBF_lowPTloose.dat";
-        cout<<"Analysing VBF Low PT loose topology."<<endl;
+        //cout<<"Analysing VBF Low PT loose topology."<<endl;
     }
     else
     {
@@ -197,7 +200,7 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate, char *L
     cuts_ad.ReadFile(CutsFile.c_str());
     char command_advanced[500];
     sprintf(command_advanced,"cp %s %s/AdvancedCuts_for_%s.dat",CutsFile.c_str(),Log_Dir,channel_name.c_str());
-    system(command_advanced);
+    int status = system(command_advanced);
     TFile *f1 = new TFile(inputfile.c_str());
     TTree *t1 = (TTree*) f1->Get((channel_name+"_Af_Basic").c_str());
     Event_Variables *event = new Event_Variables();
@@ -212,13 +215,15 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate, char *L
     // }
     // selections<<"1==1)";
     // selections>>cuts;
-    cout<<"Cuts are: "<<cuts<<endl;
+    // cout<<"Cuts are: "<<cuts<<endl;
     //return 0;
+    TCanvas *c1 = new TCanvas("c1","",800,600);
     t1->Draw("PassQ>>Count(12,-2,10)",cuts.c_str());
     gPad->Update();
     TH1F *htemp = (TH1F*) gPad->GetPrimitive("Count");
     double cs_left = htemp->Integral();
 
+    delete c1;
     return cs_left;
 }
 
@@ -259,11 +264,12 @@ int main(int argc, char const *argv[])
     TFile *f1 = new TFile(basic_output,"recreate");
     char Log_Dir[500];
     sprintf(Log_Dir,"%s/%s_Basic_Logs",argv[3],AnalysisName.c_str());
+    createdir(Log_Dir);
     char command_basic[500];
-    sprintf(command_basic,"mkdir %s",Log_Dir);
-    system(command_basic);
+    // sprintf(command_basic,"mkdir %s",Log_Dir);
+    // system(command_basic);
     sprintf(command_basic,"cp %s %s/input_config_basic", argv[2], Log_Dir);
-    system(command_basic);
+    int status = system(command_basic);
     int fakeQ=0;
     double sigma;
     string channel_name;
@@ -314,11 +320,12 @@ int main(int argc, char const *argv[])
     ofstream output(Advanced_output);
     char Log_Dir[500];
     sprintf(Log_Dir,"%s/%s_Advanced_Logs",argv[3],AnalysisName.c_str());
+    createdir(Log_Dir);
     char command_advanced[500];
-    sprintf(command_advanced,"mkdir %s",Log_Dir);
-    system(command_advanced);
+    // sprintf(command_advanced,"mkdir %s",Log_Dir);
+    // system(command_advanced);
     sprintf(command_advanced,"cp %s %s/input_config_advanced",argv[2],Log_Dir);
-    system(command_advanced);
+    int status = system(command_advanced);
     int fakeQ=0;
     double sigma;
     string channel_name;
@@ -345,4 +352,11 @@ int main(int argc, char const *argv[])
   
 }
 
+void createdir(char *dir)
+{
+    int exist;
+    exist=access(dir,NULL);
+    if (exist==0) return;
+    mkdir(dir,775);
+}
 
