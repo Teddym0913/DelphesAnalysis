@@ -357,6 +357,6 @@ void createdir(char *dir)
     int exist;
     exist=access(dir,NULL);
     if (exist==0) return;
-    mkdir(dir,775);
+    mkdir(dir,S_IRWXU|S_IRWXG|S_IROTH|S_IXOTH);//Mode: 775
 }
 
