@@ -59,4 +59,4 @@ while [ $pthiggs -le 300 ]
   	pthiggs=$[$pthiggs+20]
   done
 
-  echo "$pthiggs0  $met0  $mtata0  $mjj0  $detajjtrue0  $signalcs0  $bkgcs0  $sigmamax" >> $target/Scan_Result.datecho ""
+  echo "$pthiggs0  $met0  $mtata0  $mjj0  $detajjtrue0  $signalcs0  $bkgcs0  $sigmamax" >> $target/Scan_Result.dat
