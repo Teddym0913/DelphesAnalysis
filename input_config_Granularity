@@ -1,0 +1,6 @@
+4 20 VBF_HighPt
+0 66.66 hjj_vbf_CP0x785_Default /home/teddy/workingspace/MC-package/MG5_aMC_v2_4_3/TEDWORK/HiggsTauTau/VBF/pp_hjj_nomatch_4pi2v_withCP/Events/Granularity_Test/Default/*.root
+0 66.66 hjj_vbf_CP0x785_Fine /home/teddy/workingspace/MC-package/MG5_aMC_v2_4_3/TEDWORK/HiggsTauTau/VBF/pp_hjj_nomatch_4pi2v_withCP/Events/Granularity_Test/Fine/*.root
+0 66.66 hjj_vbf_CP0x785_Finer /home/teddy/workingspace/MC-package/MG5_aMC_v2_4_3/TEDWORK/HiggsTauTau/VBF/pp_hjj_nomatch_4pi2v_withCP/Events/Granularity_Test/Finer/*.root
+0 66.66 hjj_vbf_CP0x785_Finer_0x005 /home/teddy/workingspace/MC-package/MG5_aMC_v2_4_3/TEDWORK/HiggsTauTau/VBF/pp_hjj_nomatch_4pi2v_withCP/Events/Granularity_Test/Finer_0x005/*.root
+0 7324 zjj_vbf /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/zjj_nomatch_4pi2v_0913/zjj_nomatch_*.root

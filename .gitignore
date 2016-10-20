@@ -5,6 +5,8 @@
 *Def.cpp
 *.sublime-project
 *.sublime-workspace
+gmon.out
+gprofile_result.dat
 .DS_Store
 Delphes_Check.cpp
 Delphes_Analysis
