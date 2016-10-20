@@ -8,3 +8,5 @@
 .DS_Store
 Delphes_Check.cpp
 Delphes_Analysis
+gmon.out
+gprofile_result.dat
