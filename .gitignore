@@ -3,6 +3,7 @@
 *.eps
 *Def.h
 *Def.cpp
+!*LinkDef.h
 *.sublime-project
 *.sublime-workspace
 gmon.out
