@@ -45,8 +45,8 @@ void Smearing::ECalEnergySmearing(TLorentzVector &v1,int flags)
     double e = v1.E();
     if (flags == 12)
     {
-        eta = gRandom->Uniform(eta-0.05,eta+0.05);
-        phi = gRandom->Uniform(phi-5.0/180.0*3.14159,phi+5.0/180.0*3.14159);
+        eta = gRandom->Uniform(eta-0.01,eta+0.01);
+        phi = gRandom->Uniform(phi-0.01,phi+0.01);
     }
     double sigma = fFormulaECal->Eval(0,eta,0,e);
     e = LogNormal(e,sigma);
