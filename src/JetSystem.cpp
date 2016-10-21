@@ -756,9 +756,9 @@ bool TauJet::SetUpComponentParticles(Jet *jet, int ComponentQ)
     }
     if (ComponentQ >= 11)
     {
-        fSmearing.TrackPTSmearing(picMax);
-        fSmearing.ECalEnergySmearing(photon1,ComponentQ);
-        fSmearing.ECalEnergySmearing(photon2,ComponentQ);
+        gSmearing->TrackPTSmearing(picMax);
+        gSmearing->ECalEnergySmearing(photon1,ComponentQ);
+        gSmearing->ECalEnergySmearing(photon2,ComponentQ);
     }
     Pic = picMax;
     Pi0 = photon1 + photon2;

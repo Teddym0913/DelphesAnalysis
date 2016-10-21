@@ -23,9 +23,11 @@ TreeReader::TreeReader(const char *configfile)
         else if(temp=="add")
         {
            config>>a;
+           //cout<<a<<endl;
             if(a=="Branch")
             {
                 config>>b>>Bname>>Bclass;
+                //cout<<Bname<<"  "<<Bclass<<endl;
                 config.ignore(999,'\n');
                 BranchInfo.push_back(make_pair(Bname,Bclass));
             }

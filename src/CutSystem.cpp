@@ -410,7 +410,7 @@ JetCuts::JetCuts(const char *file)
                             }
                             else if (cuts == "TauComponentQ")
                             {
-                                infile >> TauComponentQ;
+                                infile >> TauComponentQ >> PhiGranu >> EtaGranu;
                                 infile.ignore(999,'\n');
                             }
                             else
@@ -566,7 +566,7 @@ void JetCuts::ReadFile(const char *file)
                             }
                             else if (cuts == "TauComponentQ")
                             {
-                                infile >> TauComponentQ;
+                                infile >> TauComponentQ >> PhiGranu >> EtaGranu;
                                 infile.ignore(999,'\n');
                             }
                             else

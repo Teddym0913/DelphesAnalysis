@@ -4,6 +4,7 @@
 //#include "BasicCuts.h"
 //#include "EachEvent.h"
 #include "CutSystem.h"
+#include "Utility.h"
 #include "Event_Self.h"
 #include "Event_Variables.h"
 #include "TChain.h"
@@ -66,6 +67,7 @@ int Basic_Analysis(string inputfile, string channel_name,TH1F *p2,int fakeQ,doub
     sprintf(command_basic,"cp %s %s/BasicCuts_for_%s.dat",CutsFile.c_str(),Log_Dir,channel_name.c_str());
     int status = system(command_basic);
 
+    gSmearing->SetGranularity(cuts_self.fJetCuts.PhiGranu,cuts_self.fJetCuts.EtaGranu);
     
     TreeReader *reader = new TreeReader("./config/delphes_card.dat");
     TChain *chain = new TChain("Delphes");

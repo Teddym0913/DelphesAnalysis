@@ -43,6 +43,8 @@ public:
     vector<double> LeadingPTNormalJets;
     double dPhiJMET[2];
     int TauComponentQ;
+    double PhiGranu;
+    double EtaGranu;
 };
 
 class LepCuts:public Cuts
