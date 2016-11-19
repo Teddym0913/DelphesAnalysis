@@ -3,21 +3,21 @@
 target=$1
 
 pthiggs=100
-met=100
+met=20
 mtata=90
-mjj=1000
+mjj=800
 detajj=38
 sigmamax=0
 
-while [ $pthiggs -le 300 ]
+while [ $pthiggs -le 200 ]
   do
-  	while [ $met -le 150 ]
+  	while [ $met -le 100 ]
   	  do
-  	  	while [ $mtata -le 120 ]
+  	  	while [ $mtata -le 130 ]
   	  	  do
-  	  	  	while [ $mjj -le 2500 ]
+  	  	  	while [ $mjj -le 2000 ]
   	  	  	  do
-  	  	  	  	while [ $detajj -le 56 ]
+  	  	  	  	while [ $detajj -le 52 ]
   	  	  	  	  do
   	  	  	  	  	detajjtrue=$(echo "$detajj/10" | bc -l)
   	  	  	  	  	sed -e "s/__pthiggs__/"$pthiggs"/" -e "s/__met__/"$met"/" -e "s/__mtata__/"$mtata"/" -e "s/__mjj__/"$mjj"/" -e "s/__detajj__/"$detajjtrue"/" ./config/Cuts_card_VBF_highPT_temp.dat > ./config/Cuts_card_VBF_highPT.dat
@@ -43,19 +43,20 @@ while [ $pthiggs -le 300 ]
                         detajjtrue0=$detajjtrue
                         signalcs0=$signalcs
                         bkgcs0=$bkgcs
+                        echo "$sigmamax\r"
                     fi
                     detajj=$[$detajj+2]
   	  	  	  	  done
   	  	  	  	detajj=38  
-  	  	  	  	mjj=$[$mjj+300]
+  	  	  	  	mjj=$[$mjj+200]
   	  	  	  done
-  	  	  	mjj=1000
+  	  	  	mjj=800
   	  	  	mtata=$[$mtata+5]
   	  	  done
   	  	mtata=90
-  	  	met=$[$met+10]
+  	  	met=$[$met+20]
   	  done
-  	met=100
+  	met=20
   	pthiggs=$[$pthiggs+20]
   done
 

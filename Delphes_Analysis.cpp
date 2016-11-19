@@ -224,6 +224,10 @@ double Advanced_Analysis(string inputfile, string channel_name,int cate, char *L
     gPad->Update();
     TH1F *htemp = (TH1F*) gPad->GetPrimitive("Count");
     double cs_left = htemp->Integral();
+    //t1->Draw("CPPhi4PiSys>>Dis(10,-3.1415,3.1415)",cuts.c_str());
+    //gPad->Update();
+    //TH1F *hh = (TH1F*) gPad->GetPrimitive("Dis");
+    //c1->SaveAs("zjj.eps");
 
     delete c1;
     return cs_left;

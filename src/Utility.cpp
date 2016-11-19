@@ -43,7 +43,6 @@ void Smearing::SetGranularity(double phigran, double etagran)
         //EtaCenters[i]= i*EtaGranu - (5.0-EtaGranu/2.0);
         EtaCenters.push_back(i*EtaGranu-(5.0-EtaGranu/2.0));
     } 
-    cout<<"Here"<<endl;
 }
 
 void Smearing::TrackPTSmearing(TLorentzVector &v1)

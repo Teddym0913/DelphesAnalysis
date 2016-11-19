@@ -1,4 +1,8 @@
-3 20 VBF_HighPt
-0 66.66 hjj_vbf_CP0x0 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/hjj_nomatch_4pi2v_CP0x0_0913/hjj_nomatch_*.root
-0 66.66 hjj_vbf_CP0x785 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/hjj_nomatch_4pi2v_CP0x785_0913/hjj_nomatch_*.root
-0 7324 zjj_vbf /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Raw/zjj_nomatch_4pi2v_0913/zjj_nomatch_*.root
+4 20 VBF_HighPt
+0 66.66 hjj_vbf_CP0x0 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Raw/hjj_nomatch_4pi2v_CP0x0_0913/hjj_nomatch_*.root
+0 66.66 hjj_vbf_CP0x785 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Raw/hjj_nomatch_4pi2v_CP0x785_0913/hjj_nomatch_*.root
+0 66.66 hjj_vbf_CP1x571 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Raw/hjj_nomatch_4pi2v_CP1x571_0913/hjj_nomatch_*.root
+0 7324 zjj_vbf /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Raw/zjj_nomatch_4pi2v_0913/zjj_nomatch_*.root
+0 66.66 hjj_vbf_CP0x785_G0x05 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Rerun_Delphes/hjj_CP0x785_0x05/hjj*.root
+0 66.66 hjj_vbf_CP0x785_G0x025 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Rerun_Delphes/hjj_CP0x785_0x025/hjj*.root
+0 66.66 hjj_vbf_CP0x785_G0x0125 /home/teddy/workingspace/Data_Center/HiggsTauTau/VBF/14TeV/Delphes/Rerun_Delphes/hjj_CP0x785_0x0125/hjj*.root
