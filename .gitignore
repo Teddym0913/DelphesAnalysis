@@ -3,8 +3,11 @@
 *.eps
 *Def.h
 *Def.cpp
+!*LinkDef.h
 *.sublime-project
 *.sublime-workspace
 .DS_Store
+gmon.out
+gprofile_result.dat
 Delphes_Check.cpp
 Delphes_Analysis
