@@ -12,7 +12,7 @@ public:
 	Event_Self(){};
 	Event_Self(TreeReader *, int);
 	~Event_Self(){};
-	void UpdateEvent(BasicCuts cuts){fJet->Update(bac_fake,cuts);fLep->Update(bac_fake,cuts);fMET->Update(bac_fake,cuts);}
+	void UpdateEvent(BasicCuts cuts){fJet->Update(bac_fake,cuts);fLep->Update(bac_fake,cuts);fPhoton->Update(bac_fake,cuts);fMET->Update(bac_fake,cuts);}
 	void SetUpEventPointer(TreeReader *);
 	bool BasicCutsOnEvent(BasicCuts cuts, vector<int> &PassQ );
 	bool FindTrueTaus();
@@ -22,6 +22,7 @@ public:
 	JetSystem *fJet;
 	LepSystem *fLep;
 	METSystem *fMET;
+	PhotonSystem *fPhoton;
 	TClonesArray *fParticles;
 	vector<TLorentzVector> fTauTrue;
 
