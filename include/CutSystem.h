@@ -76,6 +76,18 @@ public:
     //How should we add VBF Cuts?
 };
 
+class PhotonCuts:public Cuts
+{
+public:
+    PhotonCuts();
+    PhotonCuts(const char *file);
+    ~PhotonCuts(){}
+
+    void Clear();
+    void ReadFile(const char *file);
+    int 
+}
+
 class BasicCuts
 {
 public:
@@ -89,6 +101,7 @@ public:
     JetCuts fJetCuts;
     LepCuts fLepCuts;
     VBFCuts fVBFCuts;
+    PhotonCuts fPhotonCuts;
     double METmin;
 
 private:

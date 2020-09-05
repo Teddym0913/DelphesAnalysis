@@ -3,14 +3,14 @@ Basic Cuts:
     Jets
     {{
         NofObject 0 -1  ## Min<=  <=Max (minus mean no limit on that side)
-        NofBJets 0 0 ##
-        NofTauJets 2 2 ##
+        NofBJets 0 -1 ##
+        NofTauJets 0 -1 ##
         NofNormalJets 0 -1 ## Not including B/Tau/VBF jets
         PTmin 20 ## Minimal PT 
         Eta -2.5 0.0 0.0 2.5 ## Eta has two range (1st,2nd)+(3rd,4th)
         LeadingPT 0 ## The minimal PT for Leading Jets (all jets, no VBF Jets if in VBF category)
         LeadingBPT 0 ##
-        LeadingTauPT 2 20 20 ##
+        LeadingTauPT 0 20 20 ##
         LeadingNormalPT 0 ##
         dRJJ 0.4 ## The minimal dR between two Jets;
         dPhiJMET 0.0 1.0  ## Remove the Jet when its dPhi with MET less than the first one, if there is still jet whose dPhi with MET is less than the second then return false 
@@ -22,9 +22,9 @@ Basic Cuts:
     }}
     Leptons
     {{
-        NofObject 2 2 ##
-        NofZBoson 1 60 120 ## 0 for No Z candidates, -1 do not care and followed by the Z mass range
-        PTmin 5 ##
+        NofObject 1 -1 ##
+        NofZBoson 0 60 120 ## 0 for No Z candidates, -1 do not care and followed by the Z mass range
+        PTmin 10 ##
         Eta -2.5 0.0 0.0 2.5 ##
         LeadingPT 0 ##
         dRLL 0.4 ##
@@ -39,6 +39,13 @@ Basic Cuts:
         deltaEta 2.6 ##
         mjjmin 250 ##
         ## What should we use for VBF cuts?
+    }}
+    Photon
+    {{
+        NofObject 1 -1 ##
+        Eta -2.5 0.0 0.0 2.5 ##
+        LeadingPT 1 20.0 ##
+
     }}
     MET 0 ##    
 }
